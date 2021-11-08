@@ -8,6 +8,10 @@
 body {
   width: 100vw;
   height: 100vh;
+}
+
+body .banner {
+  position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -21,82 +25,163 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: #111;
-}
-
-body .timeDisplay {
-  width: 85%;
-  max-width: 400px;
-  font-size: 2.5rem;
-  border-radius: 10px;
-  background-color: #666666;
-  border: none;
-  margin-bottom: 2rem;
-  color: #333;
-  cursor: pointer;
-}
-
-body .timeDisplay h1 {
-  text-align: center;
-}
-
-body .select {
-  margin: 1rem 0;
-  position: relative;
-}
-
-body .select label {
-  position: absolute;
-  color: #666666;
-  top: -1.5rem;
-  font-size: 1rem;
-}
-
-body .select label:nth-of-type(1) {
-  left: calc(0.5rem + 15px);
-}
-
-body .select label:nth-of-type(2) {
-  left: calc(80px + 3rem);
-}
-
-body .select select {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  color: #bbb;
   font-size: 2rem;
-  margin: 0 0.6rem;
-  background: transparent;
-  width: 80px;
-  border: none;
-  color: #aaa;
+  z-index: 5;
+  text-align: center;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+body .banner.openGallery {
+  top: 0.7rem;
+  left: 0.7rem;
+  height: 60px;
+  width: 60px;
+  border-radius: 7px;
+  background: rgba(31, 31, 31, 0.6);
+}
+
+body .banner.openGallery h1 {
+  font-size: 0.8rem;
+}
+
+body .banner.openGallery .view {
+  display: none;
+}
+
+body .banner .view {
+  width: 80%;
+  margin-top: 2rem;
+  border-bottom: 1px solid;
+  font-size: 1.3rem;
   cursor: pointer;
 }
 
-body .select select:focus {
-  outline: none;
+body section {
+  height: 100vh;
+  width: 100%;
+  max-width: 900;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-body .startStop {
-  position: absolute;
-  bottom: 2.2rem;
-}
-
-body .startStop button {
-  height: 50px;
-  width: 50px;
-  font-size: 1.5rem;
-  border-radius: 50%;
-  border: none;
-  margin: 0rem 3.2rem;
-  background: rgba(68, 85, 68, 0.769);
+body section .item {
+  position: relative;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  width: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   cursor: pointer;
+  -webkit-transition: .3s;
+  transition: .3s;
+  -webkit-filter: brightness(0.5);
+          filter: brightness(0.5);
+  overflow: hidden;
 }
 
-body .startStop button::after {
-  content: 'Start';
+body section .item.expand {
+  -webkit-box-flex: 8;
+      -ms-flex: 8;
+          flex: 8;
+  -webkit-filter: brightness(1);
+          filter: brightness(1);
+}
+
+body section .item.expand .caption {
+  opacity: 1;
+}
+
+body section .item.expand .up {
+  opacity: 1;
+}
+
+body section .item.expand.showCaption .caption {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  color: #bbb;
+}
+
+body section .item.expand.showCaption .up {
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+  bottom: 13rem;
+}
+
+body section .item img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+body section .item .caption,
+body section .item .up {
   position: absolute;
-  top: -1.5rem;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  color: #666666;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  color: #ddd;
+  border-radius: 10px;
+  background: #6666667b;
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  -webkit-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+}
+
+body section .item .caption {
+  -webkit-transform: scale(1, 0.04);
+          transform: scale(1, 0.04);
+  -webkit-transform-origin: bottom;
+          transform-origin: bottom;
+  bottom: 0;
+  left: 0;
+  margin: 30px;
+  color: transparent;
+  padding: 0 0.7rem;
+  opacity: 0;
+  font-size: 1.1rem;
+  line-height: 25px;
+  overflow: hidden;
+}
+
+body section .item .up {
+  opacity: 0;
+  padding: 0.4rem 0.7rem 0.1rem;
+  font-weight: 800;
+  font-size: 1.2rem;
+  bottom: 3rem;
+  right: 2rem;
+}
+
+@media screen and (max-width: 507px) {
+  section {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 /*# sourceMappingURL=style.css.map */
